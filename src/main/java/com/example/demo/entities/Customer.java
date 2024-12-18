@@ -16,6 +16,17 @@ import java.util.Set;
 @AllArgsConstructor
 public class Customer {
 
+    public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postal_code = postal_code;
+        this.phone = phone;
+        this.division = division;
+        this.create_date = new Date();
+        this.last_update = new Date();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = 'customer_id')
