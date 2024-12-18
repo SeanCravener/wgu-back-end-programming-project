@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin("http://localhost:4200")
-@RepositoryRestResources(collectionResourceRel = "excursions", path = "excursions")
+@RepositoryRestResource(collectionResourceRel = "excursions", path = "excursions")
 public interface ExcursionRepository extends JpaRepository<Excursion, Long> {
 }

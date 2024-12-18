@@ -1,11 +1,11 @@
 package com.example.demo.services;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Getter
 @Setter
 public class PurchaseResponse {
 
-    private final String orderTrackingNumber;
+    private String orderTrackingNumber;
 }

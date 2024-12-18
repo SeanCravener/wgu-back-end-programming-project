@@ -30,7 +30,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         if(cartItems.isEmpty()) {
             orderTrackingNumber = "Purchase failed! You must have at least one item in your cart to purchase.";
-        } else if(cart.getParty_size < 1) {
+        } else if(cart.getParty_size() < 1) {
             orderTrackingNumber = "Purchase failed! Your party must be greater than zero.";
         } else {
             cartItems.forEach(item -> {
