@@ -26,12 +26,18 @@ public class CheckoutServiceImpl implements CheckoutService {
     public PurchaseResponse checkout(Purchase purchase) {
         Cart cart = purchase.getCart();
         Customer customer = purchase.getCustomer();
-        String orderTrackingNumber = UUID.randomUUID().toString();
         Set<CartItem> cartItems = purchase.getCartItems();
+
+        if(cartItems.isEmpty()) {
+            return "Purchase failed! You must have at least one item in your cart to purchase."
+        } else if(cart.getParty_size < 1) {
+            return "Purchase failed! Your party must be greater than zero."
+        }
         cartItems.forEach(item -> {
             item.setCart(cart);
             cart.addCartItem(item);
         });
+        String orderTrackingNumber = UUID.randomUUID().toString();
         cart.setOrderTrackingNumber(orderTrackingNumber);
         cart.setStatus(Status.ordered);
         cart.setCustomer(customer);
