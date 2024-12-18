@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.entity;
 
 public enum StatusType {
     pending, ordered, canceled;

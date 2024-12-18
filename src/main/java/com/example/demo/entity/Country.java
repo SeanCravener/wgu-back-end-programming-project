@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = 'countries')
+@Table(name = "countries")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,20 +17,20 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = 'country_id')
+    @Column(name = "country_id")
     private Long id;
 
-    @Column(name = 'country')
+    @Column(name = "country")
     private String Country_name;
 
     @CreationTimestamp
-    @Column(name = 'create_date')
+    @Column(name = "create_date")
     private Date create_date;
 
     @UpdateTimestamp
-    @Column(name = 'last_update')
+    @Column(name = "last_update")
     private Date last_update;
 
-    @OneToMany(mappedBy = 'country', cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Division> divisions;
 }

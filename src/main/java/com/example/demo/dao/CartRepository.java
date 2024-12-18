@@ -1,11 +1,11 @@
-ackage com.example.demo.dao;
+package com.example.demo.dao;
 
-import com.example.demo.entities.Cart;
+import com.example.demo.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin('http://localhost:4200')
-@RepositoryRestResources(collectionResourceRel = 'carts', path = 'carts')
+@CrossOrigin("http://localhost:4200")
+@RepositoryRestResources(collectionResourceRel = "carts", path = "carts")
 public interface CartRepository extends JpaRepository<Cart, Long> {
 }
