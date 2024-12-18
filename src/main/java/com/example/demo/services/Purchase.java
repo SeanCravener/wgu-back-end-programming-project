@@ -5,8 +5,10 @@ import com.example.demo.entity.CartItem;
 import com.example.demo.entity.Customer;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Data;
 import java.util.Set;
 
+@Data
 @Getter
 @Setter
 public class Purchase {
