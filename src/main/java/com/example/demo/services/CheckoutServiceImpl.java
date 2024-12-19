@@ -2,14 +2,12 @@ package com.example.demo.services;
 
 import com.example.demo.dao.CartRepository;
 import com.example.demo.entity.Cart;
-import com.example.demo.entity.CartItem;
-import com.example.demo.entity.Customer;
 import com.example.demo.entity.StatusType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Set;
 import java.util.UUID;
+import java.math.BigDecimal;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
@@ -29,13 +27,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         String orderTrackingNumber;
 
         // Validate party size
-        if (cart.getParty_size() <= 0) {
+        if (purchaseCart.getParty_size() <= 0) {
             orderTrackingNumber = "Invalid: Party size must be greater than 0";
             return new PurchaseResponse(orderTrackingNumber);
         }
     
         // Validate cart is not empty
-        if (purchase.getCartItems() == null || purchase.getCartItems().isEmpty()) {
+        if (purchaseCart.getPackage_price().compareTo(BigDecimal.ZERO) <= 0) {
             orderTrackingNumber = "Invalid: Cart cannot be empty";
             return new PurchaseResponse(orderTrackingNumber);
         }
