@@ -23,7 +23,7 @@ public class CartItem {
     @Column(name = "cart_item_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
@@ -35,7 +35,7 @@ public class CartItem {
     )
     private Set<Excursion> excursions;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 

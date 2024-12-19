@@ -59,6 +59,7 @@ public class Cart {
                 cartItems = new HashSet<>();
             }
             cartItems.add(item);
+            item.setCart(this);
         }
     }
 }

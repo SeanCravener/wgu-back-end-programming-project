@@ -5,12 +5,14 @@ import com.example.demo.entity.CartItem;
 import com.example.demo.entity.Customer;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import java.util.Set;
 
-@Data
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Purchase {
 
     private Customer customer;

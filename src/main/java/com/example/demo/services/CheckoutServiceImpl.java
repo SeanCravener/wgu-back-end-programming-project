@@ -24,20 +24,30 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Override
     @Transactional
     public PurchaseResponse checkout(Purchase purchase) {
-        Cart cart = purchase.getCart();
-        Customer customer = purchase.getCustomer();
-        Set<CartItem> cartItems = purchase.getCartItems();
+        // Create fresh Cart with purchase data
+        Cart cart = new Cart();
+        Cart purchaseCart = purchase.getCart();
+        
+        // Copy needed properties from purchase cart
+        cart.setPackage_price(purchaseCart.getPackage_price());
+        cart.setParty_size(purchaseCart.getParty_size());
+        
         String orderTrackingNumber = UUID.randomUUID().toString();
-        cartItems.forEach(item -> {
-            cart.addCartItem(item);
-        });
         cart.setOrderTrackingNumber(orderTrackingNumber);
         cart.setStatus(StatusType.ordered);
-        cart.setCustomer(customer);
-        customer.add(cart);
+        cart.setCustomer(purchase.getCustomer());
+        
+        purchase.getCartItems().forEach(item -> {
+            cart.addCartItem(item);
+        });
+        
         cartRepository.save(cart);
 
         return new PurchaseResponse(orderTrackingNumber);
+    }
+
+    private String generateOrderTrackingNumber() {
+        return UUID.randomUUID().toString();
     }
 
 }
