@@ -24,15 +24,26 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Override
     @Transactional
     public PurchaseResponse checkout(Purchase purchase) {
-        // Create fresh Cart with purchase data
         Cart cart = new Cart();
         Cart purchaseCart = purchase.getCart();
+        String orderTrackingNumber;
+
+        // Validate party size
+        if (cart.getParty_size() <= 0) {
+            orderTrackingNumber = "Invalid: Party size must be greater than 0";
+            return new PurchaseResponse(orderTrackingNumber);
+        }
+    
+        // Validate cart is not empty
+        if (purchase.getCartItems() == null || purchase.getCartItems().isEmpty()) {
+            orderTrackingNumber = "Invalid: Cart cannot be empty";
+            return new PurchaseResponse(orderTrackingNumber);
+        }
         
-        // Copy needed properties from purchase cart
         cart.setPackage_price(purchaseCart.getPackage_price());
         cart.setParty_size(purchaseCart.getParty_size());
         
-        String orderTrackingNumber = UUID.randomUUID().toString();
+        orderTrackingNumber = UUID.randomUUID().toString();
         cart.setOrderTrackingNumber(orderTrackingNumber);
         cart.setStatus(StatusType.ordered);
         cart.setCustomer(purchase.getCustomer());
@@ -44,10 +55,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         cartRepository.save(cart);
 
         return new PurchaseResponse(orderTrackingNumber);
-    }
-
-    private String generateOrderTrackingNumber() {
-        return UUID.randomUUID().toString();
     }
 
 }
